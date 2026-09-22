@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bright Contribution</title>
+<style>
+*{box-sizing:border-box}body{margin:0;font-family:Arial,Helvetica,sans-serif;color:#123b6d;background:#f7faff}
+header{background:#fff;display:flex;align-items:center;justify-content:space-between;padding:16px 5%;box-shadow:0 2px 8px #0001;position:sticky;top:0;z-index:10}
+.logo{font-size:24px;font-weight:800}.tag{font-size:11px;letter-spacing:3px;color:#24568b}
+nav a{margin:0 12px;text-decoration:none;color:#123b6d;font-weight:600}.login{background:#0d4076;color:#fff;padding:13px 20px;border-radius:12px}
+.hero{min-height:390px;padding:55px 7%;display:flex;align-items:center;background:linear-gradient(90deg,#0009,#0002),url('https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=1800&q=80') center/cover}
+.heroText{max-width:700px;color:#fff}.hero h1{font-size:48px;margin:8px 0}.hero p{font-size:20px;line-height:1.5}.buttons{display:flex;gap:12px;flex-wrap:wrap}.btn{border:0;border-radius:10px;padding:14px 22px;background:#0d5dcc;color:#fff;font-weight:700;cursor:pointer}.btn.gold{background:#e8a91b}
+.section{padding:38px 5%}.amounts{display:flex;gap:10px;flex-wrap:wrap}.amount{padding:18px 25px;background:#fff;border:1px solid #d8e2ef;border-radius:10px;cursor:pointer;font-weight:700;color:#123b6d}.amount.active{background:#0d4076;color:#fff}
+.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}.card{background:#fff;padding:24px;border-radius:14px;box-shadow:0 4px 18px #0000000d}.card h3{margin-top:0}
+.info{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.info div{background:#eaf3ff;padding:18px;border-radius:10px}
+footer{background:#0d4076;color:#fff;padding:22px 5%;display:flex;justify-content:space-between}
+.modal{display:none;position:fixed;inset:0;background:#0008;align-items:center;justify-content:center;z-index:20}.modalBox{background:#fff;width:min(520px,92%);padding:28px;border-radius:15px}.modalBox input,.modalBox select{width:100%;padding:12px;margin:7px 0 14px;border:1px solid #ccd7e4;border-radius:8px}.close{float:right;cursor:pointer;font-size:24px}
+@media(max-width:800px){nav{display:none}.cards,.info{grid-template-columns:1fr 1fr}.hero h1{font-size:36px}}
+@media(max-width:520px){.cards,.info{grid-template-columns:1fr}.hero{padding:35px 6%}.hero h1{font-size:31px}}
+</style>
+</head>
+<body>
+<header>
+  <div><div class="logo">🟦 Bright Contribution</div><div class="tag">TOGETHER WE GROW</div></div>
+  <nav>
+    <a href="#home">Home</a><a href="#join">Join Group</a><a href="#members">Members</a><a href="#payments">Payments</a><a href="#reviews">Reviews</a><a href="#about">About</a>
+  </nav>
+  <a class="login" href="#" onclick="openModal('loginModal');return false">👤 Member Login</a>
+</header>
+
+<section class="hero" id="home">
+  <div class="heroText">
+    <p>Welcome to</p><h1>Bright Contribution</h1>
+    <p>A monthly contribution group where members contribute and, at the end of the month, the total amount is given to one person.</p>
+    <div class="buttons"><button class="btn" type="button" onclick="goToJoinForm()">Join the Group →</button><button class="btn gold" onclick="document.getElementById('about').scrollIntoView()">Learn More</button></div>
+  </div>
+</section>
+
+<section class="section" id="join">
+<h2>Choose Your Contribution Amount</h2><p>Select the amount you want to contribute monthly.</p>
+<div class="amounts">
+  <button class="amount" onclick="selectAmount(this)">2,500 AED</button><button class="amount" onclick="selectAmount(this)">2,000 AED</button><button class="amount" onclick="selectAmount(this)">1,500 AED</button><button class="amount active" onclick="selectAmount(this)">1,000 AED</button><button class="amount" onclick="selectAmount(this)">500 AED</button><button class="amount" onclick="selectAmount(this)">400 AED</button><button class="amount" onclick="selectAmount(this)">300 AED</button><button class="amount" onclick="selectAmount(this)">250 AED</button>
+</div>
+<br><button type="button" class="btn" onclick="goToJoinForm()">Join the Selected Group →</button>
+</section>
+<section class="section" id="joinForm" style="background:#eef6ff">
+  <div class="card" style="max-width:650px;margin:auto">
+    <h2>Join Bright Contribution</h2>
+    <p>Fill in your details below. Your application will wait for administrator approval.</p>
+    <label>Full Name</label>
+    <input id="inlineName" placeholder="Your full name"
+      style="width:100%;padding:14px;margin:7px 0 14px;border:1px solid #ccd7e4;border-radius:8px">
+    <label>Phone Number</label>
+    <input id="inlinePhone" placeholder="+971..."
+      style="width:100%;padding:14px;margin:7px 0 14px;border:1px solid #ccd7e4;border-radius:8px">
+    <label>Contribution Amount</label>
+    <select id="inlineContribution"
+      style="width:100%;padding:14px;margin:7px 0 14px;border:1px solid #ccd7e4;border-radius:8px">
+      <option>250 AED</option><option>300 AED</option><option>400 AED</option>
+      <option>500 AED</option><option selected>1,000 AED</option>
+      <option>1,500 AED</option><option>2,000 AED</option><option>2,500 AED</option>
+    </select>
+    <button type="button" class="btn" onclick="submitInlineJoin()">Submit Application</button>
+    <p id="inlineJoinMsg"></p>
+  </div>
+</section>
+
+
+<section class="section">
+<div class="cards">
+<div class="card" id="members"><h3>👥 Our Members</h3><p>View group members and their contribution status.</p><button class="btn" type="button" onclick="showGroup(selected)">View Members</button></div>
+<div class="card" id="payments"><h3>💳 Payment Status</h3><p>Track who has paid and who is pending.</p><button class="btn" type="button" onclick="showPayments()">View Payments</button></div>
+<div class="card"><h3>➕ New Member</h3><p>Fill in your details and wait for admin approval.</p><button class="btn" onclick="goToJoinForm()">Join Now</button></div>
+<div class="card" id="reviews"><h3>⭐ Participant Reviews</h3><p>After receiving funds, members can share their experience.</p><button class="btn" onclick="openReview()">Write Review</button></div>
+</div>
+</section>
+
+<section class="section" id="group" style="display:none">
+<h2 id="groupTitle"></h2>
+<p id="groupDesc"></p>
+<div id="groupMembers"></div>
+<br>
+<button class="btn" onclick="goToJoinForm()">Join This Group →</button>
+<button class="btn gold" onclick="backToGroups()">Choose Another Group</button>
+</section>
+
+<section class="section" id="paymentDashboard" style="display:none">
+  <h2>Payment Status</h2>
+  <p id="paymentSummary"></p>
+  <div id="paymentList"></div>
+</section>
+<section class="section" id="about">
+<div class="info">
+<div><b>Monthly Contribution</b><br>Standard: 1,000 AED</div>
+<div><b>Grace Period</b><br>15 days carry-forward at month end</div>
+<div><b>Payment Methods</b><br>Bank Transfer / Cash</div>
+<div><b>Group Rules</b><br>Fair, transparent, and for everyone</div>
+</div>
+</section>
+
+<footer><b>Bright Contribution</b><span>Small Contributions... Big Impact!</span></footer>
+
+<div class="modal" id="joinModal"><div class="modalBox"><span class="close" onclick="closeModal('joinModal')">×</span><h2>Join Bright Contribution</h2>
+<label>Full Name</label><input id="name" placeholder="Your full name"><label>Phone</label><input id="phone" placeholder="+971..."><label>Contribution</label><select id="contribution"><option>250 AED</option><option>300 AED</option><option>400 AED</option><option>500 AED</option><option selected>1,000 AED</option><option>1,500 AED</option><option>2,000 AED</option><option>2,500 AED</option></select>
+<button class="btn" onclick="submitJoin()">Submit Application</button><p id="joinMsg"></p></div></div>
+
+<div class="modal" id="reviewModal"><div class="modalBox"><span class="close" onclick="closeModal('reviewModal')">×</span><h2>Participant Review</h2><input id="reviewName" placeholder="Your name"><textarea id="reviewText" style="width:100%;height:110px;padding:12px" placeholder="Write your experience"></textarea><br><br><button class="btn" onclick="submitReview()">Submit Review</button><p id="reviewMsg"></p></div></div>
+
+<div class="modal" id="loginModal"><div class="modalBox"><span class="close" onclick="closeModal('loginModal')">×</span><h2>Member Login</h2><input placeholder="Phone or email"><input type="password" placeholder="Password"><button class="btn" onclick="alert('Login requires a secure online database and authentication service.')">Login</button></div></div>
+
+<script>
+const contributionGroups = [
+  "250 AED","300 AED","400 AED","500 AED",
+  "1,000 AED","1,500 AED","2,000 AED","2,500 AED"
+];
+let selected = '1,000 AED';
+
+function getApplications(){
+  return JSON.parse(localStorage.getItem('brightApplications') || '[]');
+}
+function saveApplications(apps){
+  localStorage.setItem('brightApplications', JSON.stringify(apps));
+}
+function getGroupMembers(amount){
+  return getApplications().filter(a =>
+    a.contribution === amount && a.status === 'Approved'
+  );
+}
+function selectAmount(el){
+  document.querySelectorAll('.amount').forEach(x => x.classList.remove('active'));
+  el.classList.add('active');
+  selected = el.textContent.trim();
+}
+function openModal(id){document.getElementById(id).style.display='flex'}
+function closeModal(id){document.getElementById(id).style.display='none'}
+
+function showGroup(amount){
+  selected = amount || selected;
+  document.getElementById('groupTitle').textContent =
+    selected + ' Contribution Group';
+  document.getElementById('groupDesc').textContent =
+    'This section contains only members who joined the ' + selected + ' group.';
+
+  const members = getGroupMembers(selected);
+  const pending = getApplications().filter(a =>
+    a.contribution === selected && a.status === 'Pending'
+  );
+
+  let content = '';
+  if (members.length) {
+    content += members.map(m =>
+      '<div class="card" style="margin:10px 0"><b>' +
+      escapeHtml(m.name) + '</b><br>' + selected +
+      ' monthly contribution<br><small>Payment: ' +
+      escapeHtml(m.paymentStatus || 'Pending') +
+      '</small></div>'
+    ).join('');
+  } else {
+    content += '<div class="card">No approved members in this group yet.</div>';
+  }
+
+  if (pending.length) {
+    content += '<div class="card" style="margin:14px 0"><b>Pending applications:</b> ' +
+      pending.length + '</div>';
+  }
+
+  document.getElementById('groupMembers').innerHTML = content;
+  document.getElementById('group').style.display='block';
+  document.getElementById('group').scrollIntoView({behavior:'smooth'});
+}
+function backToGroups(){
+  document.getElementById('group').style.display='none';
+  document.getElementById('join').scrollIntoView({behavior:'smooth'});
+}
+function openJoin(){
+  document.getElementById('contribution').value = selected;
+  document.getElementById('joinMsg').textContent = '';
+  openModal('joinModal');
+}
+function submitJoin(){
+  const n = document.getElementById('name').value.trim();
+  const p = document.getElementById('phone').value.trim();
+  const c = document.getElementById('contribution').value;
+  if(!n || !p){
+    alert('Please enter your name and phone number.');
+    return;
+  }
+
+  const apps = getApplications();
+  apps.push({
+    id: Date.now(),
+    name:n,
+    phone:p,
+    contribution:c,
+    status:'Pending',
+    paymentStatus:'Pending',
+    paymentMethod:'Not selected',
+    joinedAt:new Date().toISOString()
+  });
+  saveApplications(apps);
+
+  document.getElementById('joinMsg').textContent =
+    'Application submitted to the ' + c +
+    ' group. It is waiting for administrator approval.';
+
+  setTimeout(()=>{
+    closeModal('joinModal');
+    showGroup(c);
+  },700);
+}
+
+function showPayments(){
+  const apps = getApplications();
+  const list = document.getElementById('paymentList');
+  const summary = document.getElementById('paymentSummary');
+
+  if(!apps.length){
+    summary.textContent = 'No member applications have been submitted on this device yet.';
+    list.innerHTML = '<div class="card">No payment records yet.</div>';
+  } else {
+    const paid = apps.filter(a => a.paymentStatus === 'Paid').length;
+    const pending = apps.length - paid;
+    summary.textContent = apps.length + ' application(s): ' + paid + ' paid, ' + pending + ' pending.';
+
+    list.innerHTML = apps.map((a, index) => `
+      <div class="card" style="margin:10px 0">
+        <b>${escapeHtml(a.name)}</b><br>
+        Group: ${escapeHtml(a.contribution)}<br>
+        Payment: <strong>${escapeHtml(a.paymentStatus || 'Pending')}</strong><br><br>
+        <button class="btn" type="button" onclick="setPaymentStatus(${index}, 'Paid')">Mark Paid</button>
+        <button class="btn gold" type="button" onclick="setPaymentStatus(${index}, 'Pending')">Mark Pending</button>
+      </div>
+    `).join('');
+  }
+
+  document.getElementById('paymentDashboard').style.display = 'block';
+  document.getElementById('paymentDashboard').scrollIntoView({behavior:'smooth'});
+}
+
+function setPaymentStatus(index, status){
+  const apps = getApplications();
+  if(!apps[index]) return;
+  apps[index].paymentStatus = status;
+  saveApplications(apps);
+  showPayments();
+}
+
+function openReview(){openModal('reviewModal')}
+function submitReview(){
+  const n = document.getElementById('reviewName').value.trim();
+  const t = document.getElementById('reviewText').value.trim();
+  if(!n || !t){
+    alert('Please enter your name and review.');
+    return;
+  }
+  const reviews = JSON.parse(localStorage.getItem('brightReviews') || '[]');
+  reviews.push({name:n,review:t,createdAt:new Date().toISOString()});
+  localStorage.setItem('brightReviews',JSON.stringify(reviews));
+  document.getElementById('reviewMsg').textContent='Review saved on this device.';
+}
+
+function goToJoinForm(){
+  const sel = document.getElementById('inlineContribution');
+  if(sel) sel.value = selected;
+  const form = document.getElementById('joinForm');
+  if(form) form.scrollIntoView({behavior:'smooth', block:'start'});
+}
+
+function submitInlineJoin(){
+  const n = document.getElementById('inlineName').value.trim();
+  const p = document.getElementById('inlinePhone').value.trim();
+  const c = document.getElementById('inlineContribution').value;
+  const msg = document.getElementById('inlineJoinMsg');
+
+  if(!n || !p){
+    msg.textContent = 'Please enter your full name and phone number.';
+    return;
+  }
+
+  const apps = getApplications();
+  apps.push({
+    id: Date.now(),
+    name:n,
+    phone:p,
+    contribution:c,
+    status:'Pending',
+    paymentStatus:'Pending',
+    paymentMethod:'Not selected',
+    joinedAt:new Date().toISOString()
+  });
+  saveApplications(apps);
+
+  msg.textContent = 'Application submitted to the ' + c +
+    ' group. It is waiting for administrator approval.';
+  document.getElementById('inlineName').value = '';
+  document.getElementById('inlinePhone').value = '';
+}
+
+function escapeHtml(value){
+  return String(value).replace(/[&<>"']/g, function(ch){
+    return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[ch];
+  });
+}
+</script>
+</body>
+</html>
